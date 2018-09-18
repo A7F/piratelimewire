@@ -1,7 +1,8 @@
 import requests, time, tqdm
 
 in_filename = "D:\Desktop\\352k.txt"
-out_filename = "D:\Desktop\\risultati.txt"
+out_filename = "D:\Desktop\\results.txt"
+
 url = "https://checker.neftlix.ml/check-account"
 
 
