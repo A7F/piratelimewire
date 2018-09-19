@@ -19,5 +19,30 @@ out_filename = "D:\Desktop\\results.txt"
 ```
 (remember the high commas "..." and to escape the path correctly)
 
+Input file must follow this format:
+```
+name@domain:password
+anothername@anotherdomain:anotherpassword
+```
+And so on... Basically is the most common formatting out there for these lists. When the process is running, you will get something like this:
+
+```
+rows found: 352073
+expected time: 1760.365min
+continue? Y/N: y
+  0%|          | 201/352073 [00:45<21:47:51,  4.48account/s]
+Parsed: 200
+Invalid accounts: 1
+Working Accounts: 0
+Waiting 60s...
+  0%|          | 401/352073 [09:08<119:51:49,  1.23s/account]
+Parsed: 400
+Invalid accounts: 2
+Working accounts: 3
+Waiting 60s...
+  0%|          | 405/352073 [10:17<1112:07:25, 11.38s/account]
+```
+
+
 ### Dependencies
 This script uses [tqdm](https://github.com/tqdm/tqdm) and [requests](https://github.com/requests/requests) so `pip install` if you don't already have them. 
